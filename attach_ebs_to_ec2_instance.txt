@@ -1,0 +1,42 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.6.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+#resources section 
+
+resource "aws_instance" "web" {
+  ami               = "ami-0c02fb55956c7d316"
+  availability_zone = "us-east-1a"
+  instance_type     = "t2.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+resource "aws_ebs_volume" "example" {
+  availability_zone = "us-east-1a"
+  size              = 8
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+# connect ec2 and instance together 
+resource "aws_volume_attachment" "ebs_att" {
+  #every ebs device name is not accepted 
+  device_name = "/dev/xvdf"
+  volume_id   = aws_ebs_volume.example.id
+  instance_id = aws_instance.web.id
+}

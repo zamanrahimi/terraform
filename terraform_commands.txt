@@ -1,0 +1,40 @@
+1. to create terraform file/create an instance 
+terraform apply 
+2. to delete the ec2 instance 
+terraform destroy
+
+Note: for replacing the OS / ami, the instance will be delete and recreated. 
+note1: in order to create VPC, Subnet and ec2 instace, we place id of vpc to subnet and subnet to ec2 
+instance in order to link them together. 
+
+
+Variable section
+
+create a file called "terraform.tfvars", that content will be loaded in main.tf automatically. 
+3. terraform fmt -diff
+well format the code. 
+
+5. terraform plan -out=plan1
+plan1 is saved. later, terraform apply will not ask confirmation. 
+5. derraform destroy --auto-approve
+6. terraform show 
+to display 
+
+7. terrraform state list 
+list what were deployed 
+
+8. terraform taint / untaint
+
+informs Terraform that a particular object has become degraded or damaged
+9. terraform output
+allow you to share data between Terraform workspaces, and with other tools and automation
+10. terraform output
+display all the values of Variable which are defined as output Variable
+
+11. how to terminate / delete an ec2 instace 
+	aws ec2 terminate-instances --instance-ids     i-032f79a7ea3073a4e
+12. to stop an ec2 instance 
+aws ec2 stop-instances --instance-ids i-1234567890abcdef0
+
+13. ebs device_name / device name is accepted by terraform 
+/dev/xvdf
